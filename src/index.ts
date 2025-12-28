@@ -1,17 +1,27 @@
 import 'dotenv/config';
 import express, { Request, Response } from 'express';
 import morgan from 'morgan';
+import { engine } from 'express-handlebars';
+import path from 'node:path';
 import { errorHandler } from './middleware';
+import todoRoutes from './routes/todo.routes';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+// Handlebars setup
+app.engine('handlebars', engine());
+app.set('view engine', 'handlebars');
+app.set('views', path.join(__dirname, 'views'));
 
 app.use(morgan('dev'));
 app.use(express.json());
 
 app.get('/', (req: Request, res: Response) => {
-    res.status(200).json({ message: 'It works!' });
+    res.redirect('/todos');
 });
+
+app.use('/todos', todoRoutes);
 
 app.use(errorHandler);
 
