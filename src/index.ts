@@ -20,6 +20,7 @@ app.set('views', path.join(__dirname, 'views'));
 
 app.use(morgan('dev'));
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.use('/bootstrap', express.static(path.join(__dirname, '../node_modules/bootstrap/dist')));
 app.use('/bootstrap-icons', express.static(path.join(__dirname, '../node_modules/bootstrap-icons/font')));

@@ -9,6 +9,12 @@ class TodoController {
 
     res.render('todos', { todos });
   };
+
+  public postTodo = async (req: Request, res: Response) => {
+    const { title, description } = req.body;
+
+    res.redirect('/todos');
+  };
 }
 
 export const todoController = new TodoController();
