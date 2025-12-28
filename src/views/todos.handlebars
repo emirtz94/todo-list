@@ -1,5 +1,5 @@
-<ul>
+<div class="todo-list">
     {{#each todos}}
-        <li>{{this}}</li>
+        {{> todo-item title=this.title description=this.description}}
     {{/each}}
-</ul>
+</div>
