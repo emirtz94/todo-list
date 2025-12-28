@@ -22,6 +22,7 @@ app.use(morgan('dev'));
 app.use(express.json());
 
 app.use('/bootstrap', express.static(path.join(__dirname, '../node_modules/bootstrap/dist')));
+app.use('/bootstrap-icons', express.static(path.join(__dirname, '../node_modules/bootstrap-icons/font')));
 
 app.get('/', (req: Request, res: Response) => {
     res.redirect('/todos');

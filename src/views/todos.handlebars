@@ -1,11 +1,15 @@
-<div class="todo-list">
-    {{#each todos}}
-        {{> todo-item title=this.title description=this.description}}
-    {{else}}
-        <div class="text-center py-5 text-muted">
-            <i class="bi bi-clipboard-check display-4 d-block mb-3 opacity-50"></i>
-            <p class="mb-1">No tasks yet</p>
-            <small>Add your first task above to get started</small>
+<div class="card">
+    <div class="card-body p-4">
+        <div class="todo-list">
+            {{#each todos}}
+                {{> todo-item title=this.title description=this.description}}
+            {{else}}
+                <div class="text-center py-5 text-muted">
+                    <i class="bi bi-clipboard-check display-4 d-block mb-3 opacity-50"></i>
+                    <p class="mb-1">No tasks yet</p>
+                    <small>Add your first task above to get started</small>
+                </div>
+            {{/each}}
         </div>
-    {{/each}}
+    </div>
 </div>
