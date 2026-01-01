@@ -2,7 +2,9 @@
 // Learn more: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+  provider   = "prisma-client"
+  output   = "../src/generated/"
+  engineType = "binary"
 }
 
 datasource db {
