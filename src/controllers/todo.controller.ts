@@ -9,7 +9,7 @@ class TodoController {
 
   public postTodo = async (req: Request, res: Response) => {
     const { title, description } = req.body;
-    todoService.create({ title, description });
+    await todoService.create({ title, description });
     res.redirect('/todos');
   };
 
@@ -32,6 +32,11 @@ class TodoController {
 
   public postDelete = async (req: Request, res: Response) => {
     await todoService.delete(parseInt(req.params.id));
+    res.redirect('/todos');
+  }
+
+  public postToggle = async (req: Request, res: Response) => {
+    await todoService.toggle(parseInt(req.params.id));
     res.redirect('/todos');
   }
 }

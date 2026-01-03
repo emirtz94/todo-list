@@ -44,6 +44,23 @@ class TodoService {
   public async delete(id: number) {
     return prisma.todo.deleteMany({ where: { id } });
   }
+
+  public async toggle(id: number) {
+    const todo = await prisma.todo.findFirst({
+      where: {
+        id,
+      },
+    });
+
+    if (!todo) {
+      throw new Error('Todo not found');
+    }
+
+    return prisma.todo.update({
+      where: { id },
+      data: { completed: !todo.completed },
+    });
+  }
 }
 
 export const todoService = new TodoService();
