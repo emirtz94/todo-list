@@ -1,4 +1,9 @@
-<div class="todo-item d-flex align-items-start gap-3 p-3 mb-2 rounded">
+<div class="todo-item d-flex align-items-start gap-3 p-3 mb-2 rounded"> 
+    <form method="post" action="/todos/{{id}}/toggle">
+        <button type="submit" class="btn {{#if completed}}btn-success{{else}}btn-outline-secondary{{/if}} btn-sm">
+            <i class="bi {{#if completed}}bi-check-lg{{else}}bi-circle{{/if}}"></i>
+        </button>
+    </form>
     <div class="flex-grow-1">
         <span class="todo-title d-block">{{title}}</span>
         {{#if description}}
