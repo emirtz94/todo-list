@@ -12,6 +12,28 @@ class TodoController {
     todoService.create({ title, description });
     res.redirect('/todos');
   };
+
+  public getEdit = async (req: Request, res: Response) => {
+    const todo = await todoService.getById(parseInt(req.params.id));
+
+    if (!todo) {
+      return res.redirect('/todos');
+    }
+
+    res.render('edit-todo', { todo });
+  };
+
+  public postEdit = async (req: Request, res: Response) => {
+    const { title, description } = req.body;
+
+    await todoService.update(parseInt(req.params.id), { title, description });
+    res.redirect('/todos');
+  };
+
+  public postDelete = async (req: Request, res: Response) => {
+    await todoService.delete(parseInt(req.params.id));
+    res.redirect('/todos');
+  }
 }
 
 export const todoController = new TodoController();
