@@ -29,3 +29,29 @@
         </div>
     </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.2/Sortable.min.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const todoList = document.querySelector('.todo-list');
+        if(todoList && todoList.children.length > 0) {
+            new Sortable(todoList, {
+                handle: '.drag-handle',
+                animation: 150,
+                ghostClass: 'bg-light',
+                onEnd: () => {
+                    const orderIds = Array.from(todoList.children).map(item => item.dataset.id);
+
+                    fetch('/todos/reorder', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ orderIds })
+                    })
+                }
+            })
+        }
+    });
+</script>

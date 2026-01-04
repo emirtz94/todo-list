@@ -39,6 +39,15 @@ class TodoController {
     await todoService.toggle(parseInt(req.params.id));
     res.redirect('/todos');
   }
+
+  public postReorder = async (req: Request, res: Response) => {
+    const { orderIds } = req.body;
+
+    if(Array.isArray(orderIds)) {
+      await todoService.reorder(orderIds.map(Number));
+    }
+    res.json({ success: true });
+  }
 }
 
 export const todoController = new TodoController();

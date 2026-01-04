@@ -1,4 +1,7 @@
-<div class="todo-item d-flex align-items-start gap-3 p-3 mb-2 rounded"> 
+<div class="todo-item d-flex align-items-start gap-3 p-3 mb-2 rounded" data-id="{{id}}"> 
+    <span class="drag-handle text-muted" style="cursor: grab;">
+        <i class="bi bi-grip-vertical"></i>
+    </span>
     <form method="post" action="/todos/{{id}}/toggle">
         <button type="submit" class="btn {{#if completed}}btn-success{{else}}btn-outline-secondary{{/if}} btn-sm">
             <i class="bi {{#if completed}}bi-check-lg{{else}}bi-circle{{/if}}"></i>

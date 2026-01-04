@@ -18,4 +18,5 @@ model Todo {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   completed   Boolean  @default(false)
+  position    Int      @default(0)
 }

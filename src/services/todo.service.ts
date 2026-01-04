@@ -6,7 +6,7 @@ class TodoService {
   public async getTodos(): Promise<Todo[]> {
     return prisma.todo.findMany({
       orderBy: {
-        createdAt: 'asc',
+        position: 'asc',
       },
     });
   }
@@ -20,10 +20,17 @@ class TodoService {
   }
 
   public async create({ title, description }: TodoCreate) {
+    const maxPosition = await prisma.todo.aggregate({
+      _max: { position: true },
+    });
+
+    const nextPosition = (maxPosition._max.position ?? -1) + 1;
+
     return prisma.todo.create({
       data: {
         title,
         description,
+        position: nextPosition,
       },
     });
   }
@@ -60,6 +67,17 @@ class TodoService {
       where: { id },
       data: { completed: !todo.completed },
     });
+  }
+
+  public async reorder(orderedIds: number[]) {
+    await prisma.$transaction(
+      orderedIds.map((id, index) =>
+        prisma.todo.update({
+          where: { id },
+          data: { position: index },
+        })
+      )
+    );
   }
 }
 
