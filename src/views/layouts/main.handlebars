@@ -11,6 +11,15 @@
     <div class="container py-4 py-md-5">
         <div class="row justify-content-center">
             <div class="col-12 col-md-8 col-lg-6">
+                <div class="d-flex justify-content-end gap-2 mb-3">
+                    {{#if isAuthenticated}}
+                        <form action="/auth/logout" method="post" class="d-inline">
+                            <button type="submit" class="btn btn-outline-danger btn-sm" title="Logout">
+                                <i class="bi bi-box-arrow-right"></i>
+                            </button>
+                        </form>
+                    {{/if}}
+                </div>
                 {{{body}}}
             </div>
         </div>

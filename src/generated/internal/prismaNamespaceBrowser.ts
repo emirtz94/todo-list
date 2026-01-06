@@ -51,7 +51,8 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
-  Todo: 'Todo'
+  Todo: 'Todo',
+  User: 'User'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -77,10 +78,23 @@ export const TodoScalarFieldEnum = {
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   completed: 'completed',
-  position: 'position'
+  position: 'position',
+  userId: 'userId'
 } as const
 
 export type TodoScalarFieldEnum = (typeof TodoScalarFieldEnum)[keyof typeof TodoScalarFieldEnum]
+
+
+export const UserScalarFieldEnum = {
+  id: 'id',
+  email: 'email',
+  password: 'password',
+  name: 'name',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -105,4 +119,13 @@ export const TodoOrderByRelevanceFieldEnum = {
 } as const
 
 export type TodoOrderByRelevanceFieldEnum = (typeof TodoOrderByRelevanceFieldEnum)[keyof typeof TodoOrderByRelevanceFieldEnum]
+
+
+export const UserOrderByRelevanceFieldEnum = {
+  email: 'email',
+  password: 'password',
+  name: 'name'
+} as const
+
+export type UserOrderByRelevanceFieldEnum = (typeof UserOrderByRelevanceFieldEnum)[keyof typeof UserOrderByRelevanceFieldEnum]
 
