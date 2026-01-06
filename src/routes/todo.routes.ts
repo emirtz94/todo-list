@@ -1,8 +1,10 @@
 import { Router } from 'express';
 import { todoController } from '../controllers/todo.controller';
+import { requireAuth } from '../middleware/auth';
 
 const router = Router();
 
+router.use(requireAuth);
 router.get('/', todoController.getTodos);
 router.post('/', todoController.postTodo);
 router.get('/:id/edit', todoController.getEdit);

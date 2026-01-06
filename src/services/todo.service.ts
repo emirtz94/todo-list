@@ -3,24 +3,29 @@ import { TodoCreate, TodoUpdate } from '../types/todo.types';
 import { Todo } from '../generated/browser';
 
 class TodoService {
-  public async getTodos(): Promise<Todo[]> {
+  public async getTodos(userId: number): Promise<Todo[]> {
     return prisma.todo.findMany({
+      where: {
+        userId,
+      },
       orderBy: {
         position: 'asc',
       },
     });
   }
 
-  public async getById(id: number): Promise<Todo | null> {
+  public async getById(id: number, userId: number): Promise<Todo | null> {
     return prisma.todo.findFirst({
       where: {
         id,
+        userId
       },
     });
   }
 
-  public async create({ title, description }: TodoCreate) {
+  public async create(userId: number, { title, description }: TodoCreate) {
     const maxPosition = await prisma.todo.aggregate({
+      where: { userId },
       _max: { position: true },
     });
 
@@ -31,31 +36,33 @@ class TodoService {
         title,
         description,
         position: nextPosition,
+        userId
       },
     });
   }
 
-  public async update(id: number, { title, description }: TodoUpdate) {
-    const todo = await prisma.todo.findFirst({ where: { id } });
+  public async update(id: number, userId: number, { title, description }: TodoUpdate) {
+    const todo = await prisma.todo.findFirst({ where: { id, userId } });
 
     if (!todo) {
       throw new Error('Todo not found');
     }
 
     return prisma.todo.update({
-      where: { id },
+      where: { id, userId },
       data: { title, description },
     });
   }
 
-  public async delete(id: number) {
-    return prisma.todo.deleteMany({ where: { id } });
+  public async delete(id: number, userId: number) {
+    return prisma.todo.deleteMany({ where: { id, userId } });
   }
 
-  public async toggle(id: number) {
+  public async toggle(id: number, userId: number) {
     const todo = await prisma.todo.findFirst({
       where: {
         id,
+        userId
       },
     });
 
@@ -64,7 +71,7 @@ class TodoService {
     }
 
     return prisma.todo.update({
-      where: { id },
+      where: { id, userId },
       data: { completed: !todo.completed },
     });
   }
