@@ -35,3 +35,11 @@ A full-stack Todo application built with **Node.js**, **Express**, **TypeScript*
     ```bash
     npx prisma studio
     ```
+
+## Login Screen
+
+![Login Screen Screenshot](/images/login-screen.png)
+
+## ToDo List Screen
+
+![ToDo List Screen Screenshot](/images/todo-list.png)
